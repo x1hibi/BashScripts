@@ -1,0 +1,73 @@
+#!/bin/bash
+
+#This function show the description of the script and the avalible options 
+
+help_dssh()
+{
+	echo "Description: dssh is a script with the porpuse to make more easy the way to access of many differents host and make the upload and download of files and directories of remoting hosts."
+	echo " "
+	echo "[OPTIONS]"	
+	echo "	dss	 This show you the avalibles host to access."
+	echo "	-u	 Uploads the files or directories, with this option you can input the files or directories form command line."
+	echo "	-d 	 Download files or directories, with this flag you can select input the director, if you don't specify the directory, automatically the current directory will set by default."
+	echo " "
+	echo "[ NOTES ]"
+	echo "	In order to the correct use of this program you need have install sshpass and ifconfig."
+}
+
+
+#This function gets as parameter the destiny directory to download the files from the selected host
+
+download_dssh()
+{
+	selectedDirectory=$1
+	echo $selectedDirectory
+	if [ -d $selectedDirectory ]
+	then
+		echo "the select directory is:"
+		echo $selectedDirectory
+	else
+		echo "The files will be downloand in the current directory."
+		selectedDirectory="."
+	fi
+	echo $selectedDirectory
+}
+
+upload_dssh()
+{
+	echo "Insert the directory omiting /home/user_name and start with the slash"
+	echo "example :/Desktop/my_folder"
+	read des
+	echo "your destiny is $destiny"
+
+}
+
+
+
+
+
+
+#getopts
+
+while getopts "duh" flags
+do
+case $flags in
+d)
+	echo "You select download function"
+	download_dssh $2
+	;;
+u)      
+	echo "You select upload function"
+	upload_dssh $2 $3 $4 $5 $6
+	;;
+h) 
+	help_dssh
+	;;
+*) 	
+	echo "the inputed flag not exist!"
+	echo "check help with -h"
+	exit 1
+	;;
+esac
+done
+
