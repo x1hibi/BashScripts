@@ -1,2 +1,2 @@
-# shellscripting
-scripts for remote host
+# Bash Scritps
+### Scripts for optimization for remote host using ssh 
